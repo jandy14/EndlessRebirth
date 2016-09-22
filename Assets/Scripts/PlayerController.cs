@@ -9,38 +9,69 @@ public class PlayerController : MonoBehaviour {
 	public bool isMovableRight;
 	public bool isMovableLeft;
 	public bool isJumpable;
+	public bool isDying;
 
+	private float timer_Jump;
+
+	/*임시변수*/
+	private float timer_respown;
 	void Start()
 	{
 		isMovableRight = true;
 		isMovableLeft = true;
 		isJumpable = false;
-	}
-	
-	void Update()
-	{
-		if(isJumpable)
-			if (Input.GetButtonDown("Jump"))
-				Jump();
-		if (Input.GetButtonDown("Fire1"))
-			Die();
+		isDying = false;
+		timer_Jump = 0;
+
+		timer_respown = 0;
     }
 
+	void Update()
+	{
+		if (Input.GetButtonDown("Fire1"))
+			Die();
+		if (Input.GetButtonUp("Jump"))
+		{
+			timer_Jump = 0;
+			//Debug.Log("timer reset : " + timer_Jump);
+		}
+
+		/*임시이다 후에 없애거나 새로 할거지만 일단은 버그를 막기위해서 해놓았다.*/
+		if (timer_respown > 0)
+		{
+			timer_respown -= Time.deltaTime;
+			if (timer_respown <= 0)
+				isDying = false;
+		}
+		
+		
+	}
 	void FixedUpdate()
 	{
 		//Debug.Log(Input.GetAxis("Horizontal"));
-		if(isMovableRight)
-			if (Input.GetAxis("Horizontal") > 0.1f)
+		if (isJumpable)
+		{
+			if (Input.GetButton("Jump"))
+			{
+				timer_Jump += Time.deltaTime;
+				Jump();
+			}
+		}
+		if (isMovableRight)
+			if (Input.GetAxis("Horizontal") > 0.01f)
 				Move(true);//오른쪽
 		if(isMovableLeft)
-			if (Input.GetAxis("Horizontal") < -0.1f)
+			if (Input.GetAxis("Horizontal") < -0.01f)
 				Move(false);//왼쪽
 		Friction();
-        //Debug.Log(GetComponent<Rigidbody2D>().velocity);
+		//Debug.Log("velocity : " + GetComponent<Rigidbody2D>().velocity.y);
+		//Debug.Log(GetComponent<Rigidbody2D>().velocity);
 	}
 	private void Jump()
 	{
-		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300));
+		//GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300));
+		//간단하고 깔끔한거 같다. 몇몇 필요한 상황아니면 그냥 velocity값을 수정해주는게 나은거 같다 적어도 지금은
+		GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 6);
 		isJumpable = false;
 	}
 	private void Move(bool isRight)
@@ -83,12 +114,16 @@ public class PlayerController : MonoBehaviour {
 		}
 		else GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
 	}
-	private void Die()
+	public void Die()
 	{
 		//시체 생성및 다시 부활
-		GameObject newBody = Instantiate(body, GetComponent<Transform>().position, GetComponent<Transform>().rotation) as GameObject;
-		newBody.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity;
-		Birth();
+		if (!isDying)
+		{
+			isDying = true;
+			GameObject newBody = Instantiate(body, GetComponent<Transform>().position, GetComponent<Transform>().rotation) as GameObject;
+			newBody.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity;
+			Birth();
+		}
 	}
 	private void Birth()
 	{
@@ -98,5 +133,7 @@ public class PlayerController : MonoBehaviour {
 		isMovableRight = true;
 		isMovableLeft = true;
 		isJumpable = false;
+
+		timer_respown = 0.1f;
 	}
 }

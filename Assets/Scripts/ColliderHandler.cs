@@ -35,11 +35,11 @@ public class ColliderHandler : MonoBehaviour {
 				GetComponentInParent<PlayerController>().isMovableLeft = false;
 		}
 		//점프관련
-		if(point.y > 0.8)
+		if(point.y > 0)
 		{
 			GetComponentInParent<PlayerController>().isJumpable = true;
 		}
-		Debug.Log("Enter : " + point);
+		//Debug.Log("Enter : " + point);
     }
 
 	void OnCollisionExit2D(Collision2D other)
@@ -61,7 +61,7 @@ public class ColliderHandler : MonoBehaviour {
 		{
 			GetComponentInParent<PlayerController>().isJumpable = false;
 		}
-		Debug.Log("Exit : " + point);
+		//Debug.Log("Exit : " + point);
 	}
 	void MoveHandler()
 	{
