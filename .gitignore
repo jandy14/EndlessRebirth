@@ -1,6 +1,6 @@
-QuadCore/Library/*
-QuadCore/temp/*
-QuadCore/ProjectSettings/ProjectSettings.asset
+/Library/*
+/temp/*
+/ProjectSettings/ProjectSettings.asset
 *.csproj
 *.suo
 *.sln
