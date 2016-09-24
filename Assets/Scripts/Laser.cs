@@ -2,38 +2,50 @@
 using System.Collections;
 
 public class Laser : MonoBehaviour {
-	private Vector3[] shootPoint;
+
+	private Transform[] shootPoint = new Transform[2];
 	private GameObject laser;
+
+	public bool isRealTime;
 
 	void Start ()
 	{
-		shootPoint = new Vector3[2];
-		shootPoint[0] = transform.FindChild("Mount1").localPosition;
-		shootPoint[1] = transform.FindChild("Mount2").localPosition;
+		shootPoint[0] = transform.FindChild("Mount1");
+		shootPoint[1] = transform.FindChild("Mount2");
 		laser = transform.FindChild("Laser").gameObject;
 
-		Vector2[] shootPoint2D = new Vector2[2];
-		shootPoint2D[0] = new Vector2(shootPoint[0].x, shootPoint[0].y);
-		shootPoint2D[1] = new Vector2(shootPoint[1].x, shootPoint[1].y);
-
-		laser.GetComponent<LineRenderer>().SetPositions(shootPoint);
-		laser.GetComponent<EdgeCollider2D>().points = shootPoint2D;
-
-		Work(false);
+		SetLaserPoint();
 	}
 
 	void Update ()
 	{
-		//작동되는지 테스트용
-		/*if(Input.GetKeyDown(KeyCode.UpArrow))
+		if(isRealTime)
+			SetLaserPoint();
+	}
+
+	private void SetLaserPoint()
+	{
+		int index;
+		Vector2[] shootPoint2D = new Vector2[2];
+
+		index = 0;
+		foreach(Transform point in shootPoint)
 		{
-			Work(true);
+			shootPoint2D[index] = new Vector2(point.localPosition.x, point.localPosition.y);
+			index++;
 		}
-		
-		if(Input.GetKeyUp(KeyCode.UpArrow))
+
+		laser.GetComponent<EdgeCollider2D>().points = shootPoint2D;
+		//이게 나을지도
+		//shootPoint2D[0] = new Vector2(shootPoint[0].localPosition.x, shootPoint[0].localPosition.y);
+		//shootPoint2D[1] = new Vector2(shootPoint[1].localPosition.x, shootPoint[1].localPosition.y);
+
+		index = 0;
+		foreach(Transform point in shootPoint)
 		{
-			Work(false);
-		}*/
+			laser.GetComponent<LineRenderer>().SetPosition(index, shootPoint[index].localPosition);
+			index++;
+		}
 	}
 
 	public void Work(bool isWork)

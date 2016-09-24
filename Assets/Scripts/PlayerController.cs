@@ -43,8 +43,6 @@ public class PlayerController : MonoBehaviour {
 			if (timer_respown <= 0)
 				isDying = false;
 		}
-		
-		
 	}
 	void FixedUpdate()
 	{

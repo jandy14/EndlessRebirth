@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour {
 	{
 		if (other.tag == "Player")
 		{
-			Debug.Log("Work");
+			//Debug.Log("Work");
 			other.transform.gameObject.GetComponentInParent<PlayerController>().Die();
 		}
 	}

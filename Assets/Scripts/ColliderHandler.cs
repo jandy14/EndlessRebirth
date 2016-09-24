@@ -27,17 +27,18 @@ public class ColliderHandler : MonoBehaviour {
 		if (point.x == -1)
 		{
 			if(other.collider.tag == "Ground")
-				GetComponentInParent<PlayerController>().isMovableRight = false;
+				GetComponent<PlayerController>().isMovableRight = false;
 		}
 		else if(point.x == 1)
 		{
 			if (other.collider.tag == "Ground")
-				GetComponentInParent<PlayerController>().isMovableLeft = false;
+				GetComponent<PlayerController>().isMovableLeft = false;
 		}
 		//점프관련
 		if(point.y > 0)
 		{
-			GetComponentInParent<PlayerController>().isJumpable = true;
+			GetComponent<PlayerController>().isJumpable = true;
+			//Debug.Break();
 		}
 		//Debug.Log("Enter : " + point);
     }
@@ -49,17 +50,17 @@ public class ColliderHandler : MonoBehaviour {
 		if (point.x < -0.5)
 		{
 			if (other.collider.tag == "Ground")
-				GetComponentInParent<PlayerController>().isMovableRight = true;
+				GetComponent<PlayerController>().isMovableRight = true;
 		}
 		else if (point.x > 0.5)
 		{
 			if (other.collider.tag == "Ground")
-				GetComponentInParent<PlayerController>().isMovableLeft = true;
+				GetComponent<PlayerController>().isMovableLeft = true;
 		}
 		//점프관련
 		if (point.y > 0.9)
 		{
-			GetComponentInParent<PlayerController>().isJumpable = false;
+			GetComponent<PlayerController>().isJumpable = false;
 		}
 		//Debug.Log("Exit : " + point);
 	}
