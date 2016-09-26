@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		Vector2 velocity = new Vector2(target.transform.position.x - transform.position.x, target.transform.position.y - transform.position.y);
+		Vector2 velocity = new Vector2((target.transform.position.x - transform.position.x) * 2, (target.transform.position.y - transform.position.y) * 2);
 		if (!isMoving)
 		{
 			if (velocity.magnitude < 1)

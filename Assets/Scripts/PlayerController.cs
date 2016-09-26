@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetAxis("Horizontal") < -0.01f)
 				Move(false);//왼쪽
 		Friction();
+		AirResistance();
 		//Debug.Log("velocity : " + GetComponent<Rigidbody2D>().velocity.y);
 		//Debug.Log(GetComponent<Rigidbody2D>().velocity);
 	}
@@ -133,5 +134,16 @@ public class PlayerController : MonoBehaviour {
 		isJumpable = false;
 
 		timer_respown = 0.1f;
+	}
+	private void AirResistance()
+	{
+		if(GetComponent<Rigidbody2D>().velocity.y > 20)
+		{
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 20);
+        }
+		else if(GetComponent<Rigidbody2D>().velocity.y < -20)
+		{
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -20);
+		}
 	}
 }
