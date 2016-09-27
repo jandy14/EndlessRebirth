@@ -49,12 +49,12 @@ public class ColliderHandler : MonoBehaviour {
 	{
 		Vector2 point = other.contacts[0].normal;
 		//이동관련
-		if (point.x < -0.5)
+		if (point.x < -0)
 		{
 			if (other.collider.tag == "Ground")
 				GetComponent<PlayerController>().isMovableRight = true;
 		}
-		else if (point.x > 0.5)
+		else if (point.x > 0)
 		{
 			if (other.collider.tag == "Ground")
 				GetComponent<PlayerController>().isMovableLeft = true;
@@ -64,7 +64,7 @@ public class ColliderHandler : MonoBehaviour {
 		{
 			GetComponent<PlayerController>().isJumpable = false;
 		}
-		//Debug.Log("Exit : " + point);
+		Debug.Log("Exit : " + point);
 	}
 	void MoveHandler()
 	{
