@@ -2,7 +2,10 @@
 using System.Collections;
 
 public class BurnBody : MonoBehaviour {
-	void Start () {}
+	void Start ()
+	{
+		StartCoroutine("Burn");
+	}
 	void Update ()
 	{
 		if(Input.GetKeyDown(KeyCode.B))
@@ -16,11 +19,13 @@ public class BurnBody : MonoBehaviour {
 	}
 	IEnumerator Burn()
 	{
+		//Debug.Log(transform.parent.gameObject);
 		GetComponent<ParticleSystem>().Play();
 		yield return new WaitForSeconds(5);
-		Destroy(GetComponent<SpriteRenderer>());
-		Destroy(GetComponent<PolygonCollider2D>());
+		Destroy(GetComponentInParent<SpriteRenderer>());
+		Destroy(GetComponentInParent<PolygonCollider2D>());
 		yield return new WaitForSeconds(1);
-		Destroy(this.gameObject);
+		//Debug.Log(transform.parent.gameObject);
+		Destroy(transform.parent.gameObject);
 	}
 }

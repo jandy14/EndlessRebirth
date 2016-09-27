@@ -9,7 +9,7 @@ public class BurnLaser : MonoBehaviour {
 	{
 		if(other.tag == "Body" || other.tag == "Object")
 		{
-			other.GetComponent<BurnBody>().BurnStart();
+			other.GetComponent<ParticleChooser>().Choose(0);
 		}
 	}
 }

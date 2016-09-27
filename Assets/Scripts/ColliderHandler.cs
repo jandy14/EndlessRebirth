@@ -24,12 +24,14 @@ public class ColliderHandler : MonoBehaviour {
 
 		Vector2 point = other.contacts[0].normal;
 		//이동관련
-		if (point.x == -1)
+		if (point.x < -0.98f)
 		{
-			if(other.collider.tag == "Ground")
+			if (other.collider.tag == "Ground")
+			{
 				GetComponent<PlayerController>().isMovableRight = false;
+			}
 		}
-		else if(point.x == 1)
+		else if(point.x > 0.98f)
 		{
 			if (other.collider.tag == "Ground")
 				GetComponent<PlayerController>().isMovableLeft = false;
