@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 
 	public GameObject target;
+
 	private bool isMoving;
 
 	void Start ()

@@ -64,7 +64,7 @@ public class ColliderHandler : MonoBehaviour {
 		{
 			GetComponent<PlayerController>().isJumpable = false;
 		}
-		Debug.Log("Exit : " + point);
+		//Debug.Log("Exit : " + point);
 	}
 	void MoveHandler()
 	{

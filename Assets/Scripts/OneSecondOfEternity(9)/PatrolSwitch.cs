@@ -9,7 +9,7 @@ public class PatrolSwitch : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.tag == "Player" || other.tag == "Body" || other.tag == "Object")
+		if (other.tag == "Player"/* || other.tag == "Body" || other.tag == "Object"*/)
 			target.GetComponent<Patrol>().StartPatrol();
 	}
 }

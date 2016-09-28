@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour {
 			timer_Jump = 0;
 			//Debug.Log("timer reset : " + timer_Jump);
 		}
+		Debug.DrawLine(transform.position, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z), Color.red,10f);
 
 		/*임시이다 후에 없애거나 새로 할거지만 일단은 버그를 막기위해서 해놓았다.*/
 		if (timer_respown > 0)
