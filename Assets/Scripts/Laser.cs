@@ -59,4 +59,12 @@ public class Laser : MonoBehaviour {
 			laser.SetActive(false);
 		}
 	}
+	public void WorkToggle()
+	{
+		if (laser.activeInHierarchy)
+			laser.SetActive(false);
+		else
+			laser.SetActive(true);
+
+	}
 }

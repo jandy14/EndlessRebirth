@@ -35,14 +35,17 @@ public class PlayerController : MonoBehaviour {
 			timer_Jump = 0;
 			//Debug.Log("timer reset : " + timer_Jump);
 		}
-		Debug.DrawLine(transform.position, new Vector3(transform.position.x + 1, transform.position.y, transform.position.z), Color.red,10f);
+		Debug.DrawLine(transform.position, new Vector3(transform.position.x + 0.01f, transform.position.y, transform.position.z), Color.red,10f);
 
 		/*임시이다 후에 없애거나 새로 할거지만 일단은 버그를 막기위해서 해놓았다.*/
 		if (timer_respown > 0)
 		{
 			timer_respown -= Time.deltaTime;
 			if (timer_respown <= 0)
+			{
 				isDying = false;
+				GetComponent<Rigidbody2D>().isKinematic = false;
+			}
 		}
 	}
 	void FixedUpdate()
@@ -122,6 +125,7 @@ public class PlayerController : MonoBehaviour {
 			isDying = true;
 			GameObject newBody = Instantiate(body, GetComponent<Transform>().position, GetComponent<Transform>().rotation) as GameObject;
 			newBody.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity;
+
 			Birth();
 		}
 	}
@@ -134,7 +138,9 @@ public class PlayerController : MonoBehaviour {
 		isMovableLeft = true;
 		isJumpable = false;
 
-		timer_respown = 0.1f;
+		GetComponent<Animator>().SetTrigger("Appear");
+		GetComponent<Rigidbody2D>().isKinematic = true;
+		timer_respown = 0.5f;
 	}
 	private void AirResistance()
 	{
