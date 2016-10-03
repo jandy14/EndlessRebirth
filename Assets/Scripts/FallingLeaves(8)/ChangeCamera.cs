@@ -4,18 +4,18 @@ using System.Collections;
 public class ChangeCamera : MonoBehaviour
 {
 	private GameObject targetCamera;
-	private float timer;
+	//private float timer;
 	private bool isStart;
 	void Start ()
 	{
 		targetCamera = GameObject.Find("Main Camera");
-		timer = 0;
+		//timer = 0;
 		isStart = false;
 	}
 	void Update ()
 	{
-		if (isStart)
-			timer += Time.deltaTime;
+		/*if (isStart)
+			timer += Time.deltaTime;*/
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
@@ -35,7 +35,7 @@ public class ChangeCamera : MonoBehaviour
 			targetCamera.GetComponent<FallingViewCamera>().enabled = false;
 			isStart = false;
 			//Debug.Log("timer : " + timer);
-			timer = 0;
+			//timer = 0;
 		}
 	}
 }

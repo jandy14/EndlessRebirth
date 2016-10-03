@@ -30,6 +30,14 @@ public class Curtain : MonoBehaviour {
 	{
 		isWork = isActive;
 	}
+	public void SetCurtainQuickly(bool isActive)
+	{
+		isWork = isActive;
+		if (isActive)
+			alpha = 1;
+		else
+			alpha = 0;
+	}
 	private void SetAlpha(float value)
 	{
 		Color current = GetComponent<SpriteRenderer>().color;
