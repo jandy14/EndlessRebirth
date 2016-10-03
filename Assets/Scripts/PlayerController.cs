@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -12,11 +13,13 @@ public class PlayerController : MonoBehaviour {
 	public bool isDying;
 
 	private float timer_Jump;
+	private GameObject gameManager;
 
 	/*임시변수*/
 	private float timer_respown;
 	void Start()
 	{
+		gameManager = GameObject.Find("GameManager");
 		isMovableRight = true;
 		isMovableLeft = true;
 		isJumpable = false;
@@ -29,7 +32,11 @@ public class PlayerController : MonoBehaviour {
 	void Update()
 	{
 		if (Input.GetButtonDown("Fire1"))
-			Die();
+		{
+			string sceneName = SceneManager.GetActiveScene().name;
+            if (sceneName != "FirstLevel" && sceneName != "Sacrifice" && sceneName != "Intro")
+				Die();
+		}
 		if (Input.GetButtonUp("Jump"))
 		{
 			timer_Jump = 0;
@@ -125,6 +132,7 @@ public class PlayerController : MonoBehaviour {
 			isDying = true;
 			GameObject newBody = Instantiate(body, GetComponent<Transform>().position, GetComponent<Transform>().rotation) as GameObject;
 			newBody.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity;
+			gameManager.GetComponent<GameManager>().CountDeath();
 
 			Birth();
 		}

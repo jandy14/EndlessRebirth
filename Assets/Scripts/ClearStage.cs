@@ -22,6 +22,7 @@ public class ClearStage : MonoBehaviour {
 		player.GetComponent<PlayerController>().isJumpable = false;
 		player.GetComponent<Rigidbody2D>().isKinematic = true;
 		player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+		GetComponent<NextStage>().GoNext();
 		yield return new WaitForSeconds(0.3f);
 		player.SetActive(false);
 	}
