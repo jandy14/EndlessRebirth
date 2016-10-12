@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.R))
 		{
-			if (SceneManager.GetActiveScene().name != "WasteOfLife" && SceneManager.GetActiveScene().name != "Ending")
+			if (SceneManager.GetActiveScene().name != "WasteOfLife" && SceneManager.GetActiveScene().name != "Ending" )
 			{
 				timer_close = 1;
 				curtain.GetComponent<Curtain>().SetCurtain(true);
