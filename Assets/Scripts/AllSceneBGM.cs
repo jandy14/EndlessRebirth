@@ -18,13 +18,14 @@ public class AllSceneBGM : MonoBehaviour {
 	}
 	void Update ()
 	{
-		if (!musicBox && timer > delay && SceneManager.GetActiveScene().name != "WasteOfLife" && SceneManager.GetActiveScene().name != "Ending")
+		string sceneName = SceneManager.GetActiveScene().name;
+        if (!musicBox && timer > delay && sceneName != "WasteOfLife" && sceneName != "Ending" && sceneName != "AnotherEnding" && sceneName != "BreakWheel")
 		{
 			musicBox = Instantiate(musicSource);
 			DontDestroyOnLoad(musicBox);
 		}
 
 		timer += Time.deltaTime;
-		Debug.Log(timer);
+		//Debug.Log(timer);
 	}
 }

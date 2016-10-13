@@ -23,15 +23,19 @@ public class GameManager : MonoBehaviour {
 			sceneDeath = GameObject.FindGameObjectsWithTag("Body").Length;
 			totalDeath += (sceneDeath - 30);
 		}
-		gameOb_SceneCount.GetComponent<Text>().text = sceneDeath.ToString();
-		gameOb_TotalCount.GetComponent<Text>().text = totalDeath.ToString();
+		if (SceneManager.GetActiveScene().name != "AnotherEnding" && SceneManager.GetActiveScene().name != "BreakWheel")
+		{
+			gameOb_SceneCount.GetComponent<Text>().text = sceneDeath.ToString();
+			gameOb_TotalCount.GetComponent<Text>().text = totalDeath.ToString();
+		}
 	}
 
 	void Update ()
 	{
 		if(Input.GetKeyDown(KeyCode.R))
 		{
-			if (SceneManager.GetActiveScene().name != "WasteOfLife" && SceneManager.GetActiveScene().name != "Ending" )
+			string sceneName = SceneManager.GetActiveScene().name;
+            if (sceneName != "WasteOfLife" && sceneName != "Ending" && sceneName != "AnotherEnding" && sceneName != "BreakWheel")
 			{
 				timer_close = 1;
 				curtain.GetComponent<Curtain>().SetCurtain(true);

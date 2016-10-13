@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButtonDown("Fire1"))
 		{
 			string sceneName = SceneManager.GetActiveScene().name;
-            if (sceneName != "FirstLevel" && sceneName != "Sacrifice" && sceneName != "Intro")
+            if (sceneName != "FirstLevel" && sceneName != "Sacrifice" && sceneName != "Intro" && sceneName != "AnotherEnding" && sceneName != "BreakWheel")
 				Die();
 		}
 		if (Input.GetButtonUp("Jump"))

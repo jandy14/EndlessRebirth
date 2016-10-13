@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class Junction : MonoBehaviour {
 
+	public GameObject player;
+
 	private GameObject curtain;
 	private float timer;
 	private string nextDestination;
@@ -20,27 +22,24 @@ public class Junction : MonoBehaviour {
 			timer -= Time.deltaTime;
 			if(timer <= 0)
 			{
-				SceneManager.LoadScene("Intro");	
+				SceneManager.LoadScene(nextDestination);	
 			}
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if(other.tag == "Player")
+		if(other.tag == "Player" || other.tag == "Body")
 		{
 			timer = 3;
 			curtain.GetComponent<Curtain>().SetCurtainQuickly(true);
 
-			//이부분은 수정해야한다.
-			nextDestination = "Intro";
+			if (player.transform.position.y > -35)
+				nextDestination = "AnotherEnding";
+			else
+				nextDestination = "Intro";
+
+			GetComponent<AudioSource>().Stop();
 		}
-		else if(other.tag == "Body")
-		{
-			timer = 3;
-			curtain.GetComponent<Curtain>().SetCurtainQuickly(true);
-			nextDestination = "Intro";
-		}
-		GetComponent<AudioSource>().Stop();
 	}
 }
