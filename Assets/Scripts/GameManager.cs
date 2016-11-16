@@ -20,10 +20,12 @@ public class GameManager : MonoBehaviour {
 		sceneDeath = 0;
 		if(SceneManager.GetActiveScene().name == "WasteOfLife")
 		{
-			sceneDeath = GameObject.FindGameObjectsWithTag("Body").Length;
+			//sceneDeath = GameObject.FindGameObjectsWithTag("Body").Length;
+			//최적화를 위해
+			sceneDeath = 725;
 			totalDeath += (sceneDeath - 30);
 		}
-		if (SceneManager.GetActiveScene().name != "AnotherEnding" && SceneManager.GetActiveScene().name != "BreakWheel")
+		if (SceneManager.GetActiveScene().name != "AnotherEnding" && SceneManager.GetActiveScene().name != "BreakWheel" && SceneManager.GetActiveScene().name != "MadnessEnding" && SceneManager.GetActiveScene().name != "Madness")
 		{
 			gameOb_SceneCount.GetComponent<Text>().text = sceneDeath.ToString();
 			gameOb_TotalCount.GetComponent<Text>().text = totalDeath.ToString();
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.R))
 		{
 			string sceneName = SceneManager.GetActiveScene().name;
-            if (sceneName != "WasteOfLife" && sceneName != "Ending" && sceneName != "AnotherEnding" && sceneName != "BreakWheel")
+            if (sceneName != "WasteOfLife" && sceneName != "Ending" && sceneName != "AnotherEnding" && sceneName != "BreakWheel" && sceneName != "MadnessEnding")
 			{
 				timer_close = 1;
 				curtain.GetComponent<Curtain>().SetCurtain(true);
@@ -62,6 +64,11 @@ public class GameManager : MonoBehaviour {
 		if(sceneDeath == 30 || sceneDeath >= 40)
 		{
 			if (SceneManager.GetActiveScene().name == "WasteOfTime")
+				EconomyOfTime();
+		}
+		if(sceneDeath == 200 || sceneDeath >= 210)
+		{
+			if (SceneManager.GetActiveScene().name == "Ending")
 				EconomyOfTime();
 		}
 	}

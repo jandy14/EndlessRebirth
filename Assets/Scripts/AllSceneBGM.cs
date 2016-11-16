@@ -19,7 +19,7 @@ public class AllSceneBGM : MonoBehaviour {
 	void Update ()
 	{
 		string sceneName = SceneManager.GetActiveScene().name;
-        if (!musicBox && timer > delay && sceneName != "WasteOfLife" && sceneName != "Ending" && sceneName != "AnotherEnding" && sceneName != "BreakWheel")
+        if (!musicBox && timer > delay && sceneName != "WasteOfLife" && sceneName != "Ending" && sceneName != "AnotherEnding" && sceneName != "BreakWheel" && sceneName != "MadnessEnding" && sceneName != "Madness")
 		{
 			musicBox = Instantiate(musicSource);
 			DontDestroyOnLoad(musicBox);
